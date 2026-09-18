@@ -5,8 +5,8 @@ API REST desenvolvida com FastAPI para gerenciamento de tarefas pessoal.
 ## Clonar o repositório
 
 ```bash
-git clone https://github.com/JoaoHardman/Gerenciador_de_tarefas.git
-cd Gerenciador_de_tarefas
+git clone https://github.com/JoaoHardman/Gerenciador_tarefas.git
+cd Gerenciador_tarefas
 ```
 
 ## Construir e iniciar a aplicação
