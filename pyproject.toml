@@ -1,0 +1,18 @@
+[project]
+name = "back-end-ebac"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "João Pedro",email = "jp.hardman.l@gmail.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard] (>=0.141.1,<0.142.0)",
+    "sqlalchemy (>=2.0.52,<3.0.0)",
+    "aiosqlite (>=0.22.1,<0.23.0)"
+]
+
+
+[build-system]
+livro.requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
