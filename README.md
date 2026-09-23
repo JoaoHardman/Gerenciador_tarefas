@@ -8,6 +8,9 @@ API REST desenvolvida com FastAPI para gerenciamento de tarefas pessoal.
 git clone https://github.com/JoaoHardman/Gerenciador_tarefas.git
 cd Gerenciador_tarefas
 ```
+## .ENV
+
+Foi adicionado um arquivo .env.example, apenas apague o ".example" e configure o endereço do DATABASE_URL para o endereço do banco de dados, e escolher usuário e senha
 
 ## Construir e iniciar a aplicação
 

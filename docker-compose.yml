@@ -9,7 +9,7 @@ services:
       - .env
     volumes:
       - .:/app
-    command: ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    command: ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
     deploy:
       replicas: 2
       restart_policy:
