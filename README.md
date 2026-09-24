@@ -10,7 +10,7 @@ cd Gerenciador_tarefas
 ```
 ## .ENV
 
-Foi adicionado um arquivo .env.example, apenas apague o ".example" e configure o endereço do DATABASE_URL para o endereço do banco de dados, e escolher usuário e senha
+Foi adicionado um arquivo .env.example, apenas apague o ".example" e escolha o usuário e senha.
 
 ## Construir e iniciar a aplicação
 
