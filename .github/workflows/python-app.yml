@@ -26,6 +26,6 @@ jobs:
         pip install flake8 pytest
         pip install poetry
     - name: poetry dependencies
-      run: poetry --no-interaction --no-root
+      run: poetry --no-interaction
     - name: tests
       run: poetry run pytest
