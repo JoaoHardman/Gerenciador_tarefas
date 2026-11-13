@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Tarefas-API
+  spec:
+  replicas: 2
+  labels:
+    app: my-app
+    selector:
+      matchLabels:
+        app: tarefas-api
+    template:
+      metadata:
+        labels:
+          app: tarefas-api
+      spec:
+        containers:
+          - name: tarefas-api
+            image: tarefas-api:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8000
+            env:
+              - name: username_correto
+                value: admin
+              - name: password_correto
+                value: admin
+              - name: PYTHONUNBUFFERED
+                value: "1"
+              - name: DATABASE_URL
+                value: sqlite:///./tarefas.db
+              - name: REDIS_HOST
+                value: redis
+              - name: REDIS_PORT
+                value: "6379"
+              - name: KAFKA_SERVER
+                value: kafka:9092

@@ -9,8 +9,65 @@ services:
       - .env
     volumes:
       - .:/app
+    environment:
+      - KAFKA_SERVER=kafka:9092
+    depends_on:
+      - kafka
     command: ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
+    restart: on-failure
+
+  redis:
+    image: "redis:alpine"
+    container_name: tarefas_redis
+    ports:
+      - "6379:6379"
+    restart: on-failure
+
+  celery:
+    build: .
+    command: ["poetry", "run", "celery", "-A", "celery_app:celery_app", "worker", "-Q", "tarefas", "--loglevel=info"]
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    restart: on-failure
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.9.1
+    container_name: tarefas_zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    restart: on-failure
+
+  kafka:
+    image: confluentinc/cp-kafka:7.9.1
+    container_name: tarefas_kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    restart: on-failure
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: tarefas-kafka-ui
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    restart: on-failure

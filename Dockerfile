@@ -1,10 +1,10 @@
-FROM python:3.14.7
+FROM python:3.13-slim
 
 WORKDIR /app
 
 RUN pip install poetry
 
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml ./
 
 RUN poetry config virtualenvs.create false && poetry install --no-root
 
