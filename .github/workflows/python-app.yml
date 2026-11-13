@@ -28,4 +28,4 @@ jobs:
     - name: poetry dependencies
       run: poetry --no-interaction
     - name: tests
-      run: poetry run pytest
+      run: pytest
